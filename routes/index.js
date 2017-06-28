@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var fs = require('fs')
-var {reduced} = require('../public/javascripts/utilites.js')
 var id = 0
 
 function makeProjectJSON(body, id) {
@@ -116,6 +115,7 @@ router.get('/requestProject', function(request, response, next) {
         projectUrl: result.projectUrl
       }) 
     } else {
+      // if no results are found, return no projects found
       response.json({
         message: "no project found"
       })
@@ -124,7 +124,7 @@ router.get('/requestProject', function(request, response, next) {
 })
 
 router.post('/createProject', function(request, response) {
-
+  // grabs the existing projects.txt file, deletes any empty lines in the file then iterates to the next Id
   var projectsArray = getProjects()
   var lastProject = projectsArray.pop()
   var lastID = lastProject.id
@@ -132,7 +132,7 @@ router.post('/createProject', function(request, response) {
   lastID += 1
 
   var project = makeProjectJSON(request.body, lastID)
-
+  // appends the new project to the text file as a stringified object
   fs.appendFile('projects.txt', '\n' + JSON.stringify(project), 'utf-8', function (err) {
     if (err) throw err;
     console.log('campaign is successfully created');
