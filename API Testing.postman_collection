@@ -1,0 +1,295 @@
+{
+	"variables": [],
+	"info": {
+		"name": "API Testing",
+		"_postman_id": "0f3b56ac-e6e3-befb-671f-ecc214ad1b0b",
+		"description": "separate tests for this API to be used with Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Search for India",
+			"request": {
+				"url": {
+					"raw": "localhost:3000/requestProject?country=INDIA",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"requestProject"
+					],
+					"query": [
+						{
+							"key": "projectId",
+							"value": "3",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "country",
+							"value": "INDIA",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "number",
+							"value": "29",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "keyword",
+							"value": "sports",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":2,\"projectName\":\"test project number 2\",\"creationDate\":\"0511201700:00:00\",\"expiryDate\":\"0520201700:00:00\",\"targetCountries\":[\"USA\",\"CANADA\",\"MEXICO\",\"ENGLAND\"],\"projectCost\":25.5,\"projectUrl\":\"http://www.unity3d.com\",\"targetKeys\":[{\"number\":85,\"keyword\":\"games\"},{\"number\":30,\"keyword\":\"sports\"}]}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project",
+			"request": {
+				"url": {
+					"raw": "localhost:3000/createProject",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"createProject"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "USA",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "number",
+							"value": "29",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "keyword",
+							"value": "sports",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"projectName\":\"test project number 6\",\n\"creationDate\":\"0511201700:00:00\",\n\"expiryDate\":\"0520201700:00:00\",\n\"targetCountries\":[\"usa\",\"CANADA\",\"MEXICO\",\"ENGLAND\", \"turkey\"],\n\"projectCost\":8000000.00,\n\"projectUrl\":\"http://www.unity3d.com\",\n\"targetKeys\":[\n\t\t{\n\t\t\"number\":85,\n\t\t\"keyword\":\"games\"\n\t\t},\n\t\t{\n\t\t\"number\":30,\n\t\t\"keyword\":\"things\"\n\t\t}\n\t]\n}"
+				},
+				"description": "Creates a project"
+			},
+			"response": []
+		},
+		{
+			"name": "blank request",
+			"request": {
+				"url": {
+					"raw": "localhost:3000/requestProject",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"requestProject"
+					],
+					"query": [
+						{
+							"key": "projectId",
+							"value": "4",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "country",
+							"value": "USA",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "number",
+							"value": "29",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "keyword",
+							"value": "sports",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":2,\"projectName\":\"test project number 2\",\"creationDate\":\"0511201700:00:00\",\"expiryDate\":\"0520201700:00:00\",\"targetCountries\":[\"USA\",\"CANADA\",\"MEXICO\",\"ENGLAND\"],\"projectCost\":25.5,\"projectUrl\":\"http://www.unity3d.com\",\"targetKeys\":[{\"number\":85,\"keyword\":\"games\"},{\"number\":30,\"keyword\":\"sports\"}]}"
+				},
+				"description": "blank request\n\nshould return highest cost project"
+			},
+			"response": []
+		},
+		{
+			"name": "full request returning highest cost with multiple variables",
+			"request": {
+				"url": {
+					"raw": "localhost:3000/requestProject?projectId=4&country=USA&number=29&keyword=sports",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"requestProject"
+					],
+					"query": [
+						{
+							"key": "projectId",
+							"value": "4",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "country",
+							"value": "USA",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "number",
+							"value": "29",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "keyword",
+							"value": "sports",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":2,\"projectName\":\"test project number 2\",\"creationDate\":\"0511201700:00:00\",\"expiryDate\":\"0520201700:00:00\",\"targetCountries\":[\"USA\",\"CANADA\",\"MEXICO\",\"ENGLAND\"],\"projectCost\":25.5,\"projectUrl\":\"http://www.unity3d.com\",\"targetKeys\":[{\"number\":85,\"keyword\":\"games\"},{\"number\":30,\"keyword\":\"sports\"}]}"
+				},
+				"description": "full request, should just return project number 4\n\nshould return highest cost project"
+			},
+			"response": []
+		},
+		{
+			"name": "Id inclusion",
+			"request": {
+				"url": {
+					"raw": "localhost:3000/requestProject?projectId=3&country=USA&number=29&keyword=sports",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"requestProject"
+					],
+					"query": [
+						{
+							"key": "projectId",
+							"value": "3",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "country",
+							"value": "USA",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "number",
+							"value": "29",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "keyword",
+							"value": "sports",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":2,\"projectName\":\"test project number 2\",\"creationDate\":\"0511201700:00:00\",\"expiryDate\":\"0520201700:00:00\",\"targetCountries\":[\"USA\",\"CANADA\",\"MEXICO\",\"ENGLAND\"],\"projectCost\":25.5,\"projectUrl\":\"http://www.unity3d.com\",\"targetKeys\":[{\"number\":85,\"keyword\":\"games\"},{\"number\":30,\"keyword\":\"sports\"}]}"
+				},
+				"description": "if the ID is included, disregard all other query params\n\n\nShould return ID 3"
+			},
+			"response": []
+		}
+	]
+}
