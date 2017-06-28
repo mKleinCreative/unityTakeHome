@@ -5,6 +5,7 @@ var fs = require('fs')
 var id = 0
 
 function makeProjectJSON(body, id) {
+  // formats the project into a JSON object from the post request.
   var project = {};
   project.id = id
   project.projectName = body.projectName;
@@ -43,13 +44,12 @@ function checkIfExpired(date){
   
   date = new Date(formattedTime)
   currentTime = Date.now()
-  console.log( '---===date===---', date > currentTime )
+  console.log( '---=== Dates are expired? ===---', date > currentTime )
   return date > currentTime
 }
 
 const filterNulls = projectArray => {
   // Filter out projects that aren't enabled, aren't expired and don't have a project URL
-  console.log( '---===projectArray===---', projectArray )
   return projectArray
     .filter( project => project.enabled )
     .filter( project => checkIfExpired(project.expiryDate))
@@ -91,14 +91,14 @@ router.get('/requestProject', function(request, response, next) {
   }
   else {
     // Otherwise through it through a line of checks going through and checking for the country, keyword or number provided.
+    console.log( '---=== Filtered out invalid projects before ===---', splitFile )
     splitFile = filterNulls( splitFile )
-    console.log( '---===splitFile1===---', splitFile )
+    console.log( '---=== Filtered out invalid projects after ===---', splitFile )
     if ( country ) {
       splitFile = splitFile.filter(ele => {
         return ele.targetCountries.includes(country)
       })
     }
-    console.log( '---===splitFile2===---', splitFile )
     if ( number ) {
       splitFile = splitFile.filter(ele => ele.targetKeys.filter(item => item.number === number))
     }
@@ -108,6 +108,7 @@ router.get('/requestProject', function(request, response, next) {
     }
     // the final result gets filtered for the highest cost. If no filters were met, it should come to this point 
     let result = getProjectWithHighestCost( splitFile )
+    console.log( '---=== Campaign with highest cost returned ===---', splitFile )
     if (result) {
       response.json({
         projectName: result.projectName,
@@ -132,6 +133,8 @@ router.post('/createProject', function(request, response) {
   lastID += 1
 
   var project = makeProjectJSON(request.body, lastID)
+  
+  console.log( '---=== Project object ===---', project )
   // appends the new project to the text file as a stringified object
   fs.appendFile('projects.txt', '\n' + JSON.stringify(project), 'utf-8', function (err) {
     if (err) throw err;
