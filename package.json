@@ -9,6 +9,7 @@
     "body-parser": "~1.16.0",
     "debug": "~2.6.0",
     "express": "~4.14.1",
+    // nodemon should be in devDependencies
     "nodemon": "^1.11.0"
   }
 }
